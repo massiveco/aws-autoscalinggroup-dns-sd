@@ -1,0 +1,22 @@
+{
+  "Progress": 50,
+  "AccountId": "057120273157",
+  "Description": "Terminating EC2 instance: i-055d336e40382a8ca",
+  "RequestId": "6043c162-0b39-465b-a95e-fad4c9543cf3",
+  "EndTime": "2018-05-30T03:25:30.839Z",
+  "AutoScalingGroupARN": "arn:aws:autoscaling:us-east-1:057120273157:autoScalingGroup:66583c15-1c51-4d29-8b51-e7cce094aa92:autoScalingGroupName/testing",
+  "ActivityId": "6043c162-0b39-465b-a95e-fad4c9543cf3",
+  "StartTime": "2018-05-30T03:24:28.376Z",
+  "Service": "AWS Auto Scaling",
+  "Time": "2018-05-30T03:25:30.839Z",
+  "EC2InstanceId": "i-09c2cc29f1467b996",
+  "StatusCode": "InProgress",
+  "StatusMessage": "",
+  "Details": {
+    "Subnet ID": "subnet-62d2c006",
+    "Availability Zone": "us-east-1a"
+  },
+  "AutoScalingGroupName": "testing",
+  "Cause": "At 2018-05-30T03:24:18Z a user request update of AutoScalingGroup constraints to min: 0, max: 1, desired: 0 changing the desired capacity from 1 to 0.  At 2018-05-30T03:24:28Z an instance was taken out of service in response to a difference between desired and actual capacity, shrinking the capacity from 1 to 0.  At 2018-05-30T03:24:28Z instance i-055d336e40382a8ca was selected for termination.",
+  "Event": "autoscaling:EC2_INSTANCE_TERMINATE"
+}
