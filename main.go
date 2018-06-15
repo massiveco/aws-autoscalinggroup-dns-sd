@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/massiveco/aws-autoscalinggroup-a-record/reactor"
+	"github.com/massiveco/aws-autoscalinggroup-dns-sd/reactor"
 )
 
 var r reactor.Reactor
