@@ -6,5 +6,8 @@ test:
 
 build:
 	GOOS=linux go build .
-	zip deploy.zip aws-autoscalinggroup-a-record
-	rm aws-autoscalinggroup-a-record
+	zip deploy.zip aws-autoscalinggroup-dns-sd
+	rm aws-autoscalinggroup-dns-sd
+
+release: build
+	aws s3 cp ./deploy.zip s3://ma.ssive.co/lambdas/massive_autoscaling_dns_sd.zip
