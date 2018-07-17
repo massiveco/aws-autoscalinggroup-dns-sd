@@ -1,4 +1,4 @@
-resource "aws_autoscaling_notification" "example_notifications" {
+resource "aws_autoscaling_notification" "dnssd_notifications" {
   group_names = [
     "${var.aws_autoscaling_group_name}",
   ]
@@ -12,7 +12,7 @@ resource "aws_autoscaling_notification" "example_notifications" {
 }
 
 resource "aws_sns_topic" "controllers_autoscaling" {
-  display_name = "${var.aws_autoscaling_group_name} Autoscaling Events"
+  display_name = "${var.aws_autoscaling_group_name} Autoscaling Events: DNS-SD"
 }
 
 resource "aws_sns_topic_subscription" "controllers_autoscaling" {
@@ -22,7 +22,7 @@ resource "aws_sns_topic_subscription" "controllers_autoscaling" {
 }
 
 resource "aws_iam_role" "controllers_dns_sd" {
-  name_prefix = "${var.aws_autoscaling_group_name}_dns_sd_"
+  name_prefix = "${var.aws_autoscaling_group_name}_ds_"
 
   assume_role_policy = <<EOF
 {
@@ -41,7 +41,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "controllers_dns_sd_logging" {
-  name_prefix = "${var.aws_autoscaling_group_name}_dns_sd_lambda_logging_"
+  name_prefix = "${var.aws_autoscaling_group_name}_ds_logging_"
   role        = "${aws_iam_role.controllers_dns_sd.id}"
 
   policy = <<EOF
@@ -77,7 +77,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "controllers_dns_sd" {
-  name_prefix = "${var.aws_autoscaling_group_name}_dns_sd_lambda_"
+  name_prefix = "${var.aws_autoscaling_group_name}_ds_"
   role        = "${aws_iam_role.controllers_dns_sd.id}"
 
   //TODO: Restrict this to a single hosted zone
@@ -111,7 +111,7 @@ resource "aws_lambda_function" "controllers_dns_sd" {
   s3_bucket = "ma.ssive.co"
   s3_key    = "lambdas/massive_autoscaling_dns_sd.zip"
 
-  function_name = "${var.aws_autoscaling_group_name}_autoscaling_handler"
+  function_name = "asg_${var.aws_autoscaling_group_name}_dns_sd"
   role          = "${aws_iam_role.controllers_dns_sd.arn}"
   handler       = "aws-autoscalinggroup-dns-sd"
   runtime       = "go1.x"
